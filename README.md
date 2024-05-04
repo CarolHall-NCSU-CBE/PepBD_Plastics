@@ -58,6 +58,8 @@ After reducing the system size, prepare the pdb file so it can be understood by 
  - Remove any lines that do not have atomic coordinates, including TER and END
  - If needed, reorder the atoms so the peptide appears first in the file, then is followed by the receptor
     - If this is done, then fix the residue and atom numbering to match the new order. The tleap Amber of module is useful for this.
+  
+An example pdb file is provided in the repository.
 
 ### REQUIRED PEPBD FILE - PepBD_V.1.7.f90 ###
 Count the total number of residues in the final pdb file, then replace "gnum=0" in with "gnum={NUM_RESIDUES} in the PepBD_1.7.f90 file.
@@ -65,7 +67,7 @@ Count the total number of residues in the final pdb file, then replace "gnum=0" 
 ### COMPILING ###
 To compile the program, the intel compiler needs to be used (the program does not run properly when compiled with gfortran!). Compiling appears to work (at least) with compiler versions 2017 to present. PepBD can be compiled via the command 
 
-ifort -O2 -o main PepBD_V1.7.f90
+ifort -O2 -o main PepBD_1.7.f90
 
 Note that the program needs to be recompiled each time the system size changes, due to the "gnum" parameter changing. This has been fixed in more recent versions, but is retained here since this version of the program was used in the paper.
 
