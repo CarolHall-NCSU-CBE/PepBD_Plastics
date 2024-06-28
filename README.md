@@ -1,16 +1,39 @@
-# PepBD_Plastics
-PepBD code used for designing plastic-binding peptides
+# Description
+PepBD_Plastics is a Fortran program that discovers polypeptides predicted to have affinity for common plastics using Monte Carlo sampling and atomistic biophysical modeling. 
 
-### REQUIRED FILES FOR RUNNING PEPBD ###
-The following files are required to run PepBD. Each is described in more detail below. All files should be placed in the directory for running PepBD, unless otherwise noted.
-- PepBD_V.1.9.f90
-- input.txt (see details below)
-- a pdb file of the peptide-receptor (see details below)
+# Required input files
+All should be placed in the directory for running PepBD, unless otherwise noted. Examples are provided in the repository
+- compiled executable
+- input.txt (see below for details)
+- sys.pdb (see below for details)
 - the lib folder, placed at the location ~/PepBD/
-- An empty directory named "pdbfiles" in the same directory the program is being run
+- A directory named `pdbfiles` 
 
-### REQUIRED PEPBD FILE - INPUT FILE ###
-The name of this file must be "input.txt". An example input file is provided in the repository. The variables that can be specified in the input file are the following:
+# Installation and Compilation
+Requirements: Intel ifort compiler (tested on versions 2017 - 2024)
+
+  1. Navigate to the directory with PepBD_Plastics.f90
+  2. Determine the total number of residues, `num_residues` in sys.pdb
+  3. Replace `gnum=0` in with `gnum=num_residues` in  PepBD_Plastics.f90 file.
+  4. Run the command `ifort -O2 -o main PepBD_Plastics.f90`
+
+# Running PepBD_Plastics
+
+Run from a terminal using `./main`. Note that PepBD_Plastics is a serial program.
+
+The runtime depends on the system size and number of design steps, but normally takes a day to a week to complete.
+
+# Output of PepBD_Plastics
+Examples of each output are provided in the repository
+   1. energyprofile.txt: score and energy components at each PepBD step
+   2. energydetails.txt: sequence, energy, and move type at each PepBD step
+   3. output.txt: Details of the PepBD run
+   4. Generated pdbs: stored in the `pdbfiles` directory
+   5. rmsd.txt: the rmsd relative to the starting state at each step of design. This is disabled in PepBD_Plastics.f90, so 0 is output at every step.
+ 
+# Details on required files
+# input.txt
+The file must be named `input.txt`. The following variables that can be specified 
 - PDBFILE (required): the name of the pdb file containing the peptide-receptor complex
 - RESTARTPDB (required): the name of the pdb file if restarting PEPBD halfway through design. If starting at beginning of design, then name should match PDBFILE
 - RECALCUSWITCH (required): Specifies if design is starting at beginning or being restarted from previous run. Set to 0 if starting from beginning, 1 otherwise. If set to 1, then the coordinates in "RESTARTPDB" will be used as the starting point for design
@@ -51,38 +74,9 @@ The name of this file must be "input.txt". An example input file is provided in 
 - SA_T_START (default=10): Starting reference system temperature for both sequence and backbone changes. Units of kcal/mol
 - SA_T_END (default=0.5): Final reference system temperature for both sequence and backbone changes. Units of kcal/mol
 
-### REQUIRED PEPBD FILE - SYSTEM PDB FILE ###
-Contains the peptide-receptor complex. Since PepBD runs slower as the system size increases, receptor atoms that are far from the peptide are removed from the pdb file. Common cutoff distances used are 8-10 Angstroms. 
-
-After reducing the system size, prepare the pdb file so it can be understood by PepBD by doing the following
- - Remove any lines that do not have atomic coordinates, including TER and END
- - If needed, reorder the atoms so the peptide appears first in the file, then is followed by the receptor
-    - If this is done, then fix the residue and atom numbering to match the new order. The tleap Amber of module is useful for this.
+## sys.pdb
+Contains the peptide-receptor complex. Since PepBD_Plastics takes longer as the system size increases, typically receptor atoms that are 10 Angstroms from the peptide are removed, e.g. using VMD.
+`sys.pdb` should be formatted such that
+ - Only lines for atomic coordinates remain
+ - The peptide appears first, followed by the receptor 
   
-An example pdb file is provided in the repository.
-
-### REQUIRED PEPBD FILE - PepBD_V.1.7.f90 ###
-Count the total number of residues in the final pdb file, then replace "gnum=0" in with "gnum={NUM_RESIDUES} in the PepBD_1.7.f90 file.
-
-### COMPILING ###
-To compile the program, the intel compiler needs to be used (the program does not run properly when compiled with gfortran!). Compiling appears to work (at least) with compiler versions 2017 to present. PepBD can be compiled via the command 
-
-ifort -O2 -o main PepBD_1.7.f90
-
-Note that the program needs to be recompiled each time the system size changes, due to the "gnum" parameter changing. This has been fixed in more recent versions, but is retained here since this version of the program was used in the paper.
-
-### RUNNING THE PROGRAM ###
-
-Run the executable as normal. For example, if the executable is named "main", then it can be run from the terminal using
-./main
-
-The duration depends on the system size and the number of steps to be performed, but normally takes a day to a week to complete. Note that PepBD_V1.7.f90 is not parallelized and does not support GPU.
-
-#### GENERATED DATA FILES ####
-The outputs from PepBD are the following:
-	-energyprofile.txt: score and energy components at each PepBD step
-	-energydetails.txt: sequence, energy, and move type at each PepBD step
-	-output.txt: Details of the PepBD run
-	-"pdbfiles" directory, which contains pdbs periodically generated during PepBD design.
-	-rmsd.txt: the rmsd relative to the starting state at each step of design. This is disabled in PepBD_V1.7.f90, so it outputs 0 at every step.
- 
