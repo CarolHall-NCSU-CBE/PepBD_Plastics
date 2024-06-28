@@ -1,0 +1,55 @@
+ Starting new cycle, reference kBT value is    3.60000000000000     
+ Starting new cycle, reference kBT value is    3.24000000000000     
+ Starting new cycle, reference kBT value is    2.91600000000000     
+ Starting new cycle, reference kBT value is    2.62440000000000     
+ Starting new cycle, reference kBT value is    2.36196000000000     
+ Starting new cycle, reference kBT value is    2.12576400000000     
+ Starting new cycle, reference kBT value is    1.91318760000000     
+ Starting new cycle, reference kBT value is    1.72186884000000     
+ Starting new cycle, reference kBT value is    1.54968195600000     
+ Starting new cycle, reference kBT value is    1.39471376040000     
+ Starting new cycle, reference kBT value is    1.25524238436000     
+ Starting new cycle, reference kBT value is    1.12971814592400     
+ Starting new cycle, reference kBT value is    1.01674633133160     
+ Starting new cycle, reference kBT value is   0.915071698198440     
+ Starting new cycle, reference kBT value is   0.823564528378596     
+ Starting new cycle, reference kBT value is   0.741208075540737     
+ Starting new cycle, reference kBT value is   0.667087267986663     
+ Starting new cycle, reference kBT value is   0.600378541187997     
+ Starting new cycle, reference kBT value is   0.540340687069197     
+ Starting new cycle, reference kBT value is   0.486306618362277     
+ Starting new cycle, reference kBT value is   0.437675956526050     
+ Starting new cycle, reference kBT value is   0.393908360873445     
+ Starting new cycle, reference kBT value is   0.354517524786100     
+ Starting new cycle, reference kBT value is   0.319065772307490     
+ Starting new cycle, reference kBT value is   0.287159195076741     
+ Starting new cycle, reference kBT value is   0.258443275569067     
+ Starting new cycle, reference kBT value is   0.232598948012160     
+ Starting new cycle, reference kBT value is   0.209339053210944     
+ Starting new cycle, reference kBT value is   0.188405147889850     
+ Starting new cycle, reference kBT value is   0.169564633100865     
+ Starting new cycle, reference kBT value is   0.152608169790778     
+ Starting new cycle, reference kBT value is   0.137347352811701     
+ 
+ ********************
+ Probalities of Accepting Peptide Changes
+                SCMF Mutations   0.202
+               Point Mutations   0.302
+  N and C termini CONROT moves   0.181
+       N terminus CONROT moves   0.229
+       C terminus CONROT moves   0.276
+         Internal CONROT moves   0.170
+ 
+ Per Residue probabilities of successful sequence changes
+ Residue  1   0.339
+ Residue  2   0.157
+ Residue  3   0.224
+ Residue  4   0.203
+ Residue  5   0.589
+ Residue  6   0.308
+ Residue  7   0.183
+ Residue  8   0.278
+ Residue  9   0.260
+ Residue 10   0.166
+ Residue 11   0.144
+ Residue 12   0.299
